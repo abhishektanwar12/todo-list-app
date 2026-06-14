@@ -8,8 +8,17 @@ const taskCounter = document.getElementById("taskCounter");
 loadTasks();
 
 function updateCounter(){
+
+    const totalTasks = taskList.children.length;
+
+    const completedTasks =
+        document.querySelectorAll(".completed").length;
+
+    const pendingTasks =
+        totalTasks - completedTasks;
+
     taskCounter.innerText =
-        `Tasks: ${taskList.children.length}`;
+        `Total: ${totalTasks} | Completed: ${completedTasks} | Pending: ${pendingTasks}`;
 }
 
 function saveTasks(){
@@ -36,6 +45,8 @@ function addTask(){
     span.addEventListener("click", function(){
 
         span.classList.toggle("completed");
+
+        updateCounter();
 
         saveTasks();
     });
